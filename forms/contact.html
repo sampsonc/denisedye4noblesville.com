@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Denise Dye for School Board</title>
+    <meta name="description" content="Get in touch with Denise Dye's campaign for Noblesville School Board.">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 160px auto 60px;
+            padding: 0 20px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            padding: var(--space-8);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-6);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--space-3);
+            border: 2px solid var(--border);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-base);
+            font-family: var(--font-primary);
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+            margin-top: var(--space-8);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: var(--space-6);
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .required {
+            color: var(--accent);
+        }
+
+        .contact-alternatives {
+            background: var(--bg);
+            padding: var(--space-6);
+            border-radius: var(--border-radius);
+            margin-top: var(--space-8);
+        }
+
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+        }
+
+        .contact-method {
+            text-align: center;
+            padding: var(--space-4);
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            border: 2px solid var(--border);
+        }
+
+        .contact-method strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .contact-method a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .contact-method a:hover {
+            color: var(--primary);
+        }
+
+        .form-note {
+            background: var(--bg);
+            padding: var(--space-4);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-6);
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .form-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <a href="../index.html#contact" class="back-link">← Back to Campaign</a>
+
+        <div class="form-card">
+            <h1>Contact Denise Dye</h1>
+            <p class="section-subtitle">I want to hear from you! Send me your questions, comments, or concerns.</p>
+
+            <div class="form-note">
+                <strong>We value your input!</strong> Your questions and concerns help us better understand the issues that matter most to Noblesville families. We'll respond to your message as soon as possible.
+            </div>
+
+            <form id="contact-form" method="POST" action="#" novalidate>
+                <div class="form-group">
+                    <label for="name">Full Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(317) 555-0123">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address (Optional)</label>
+                    <input type="text" id="address" name="address" placeholder="Street address, Noblesville, IN">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject <span class="required">*</span></label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a topic</option>
+                        <option value="general-question">General Question</option>
+                        <option value="education-issue">Education Issue/Concern</option>
+                        <option value="candidate-question">Question for the Candidate</option>
+                        <option value="endorsement">Endorsement Inquiry</option>
+                        <option value="volunteer">Volunteer Opportunities</option>
+                        <option value="media-inquiry">Media Inquiry</option>
+                        <option value="event-invitation">Event or Speaking Request</option>
+                        <option value="support">Show Support</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message <span class="required">*</span></label>
+                    <textarea id="message" name="message" required placeholder="Please share your thoughts, questions, or concerns. We want to hear from you!"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="response-preference">Preferred response method</label>
+                    <select id="response-preference" name="response-preference">
+                        <option value="email">Email (default)</option>
+                        <option value="phone">Phone call</option>
+                        <option value="either">Either email or phone</option>
+                        <option value="no-response">No response needed</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 12px;">
+                    <input type="checkbox" id="newsletter" name="newsletter" value="yes" style="width: auto;">
+                    <label for="newsletter" style="margin: 0; cursor: pointer;">
+                        Keep me updated on campaign news and events
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <a href="../index.html" class="btn btn-secondary">Back to Campaign</a>
+                </div>
+            </form>
+
+            <div class="contact-alternatives">
+                <h3 style="text-align: center; margin-bottom: var(--space-4); color: var(--primary);">
+                    Other Ways to Reach Us
+                </h3>
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <strong>Email</strong>
+                        <a href="mailto:denisedye4noblesville@gmail.com">denisedye4noblesville@gmail.com</a>
+                    </div>
+
+                    <div class="contact-method">
+                        <strong>Phone</strong>
+                        <a href="tel:+13172234130">(317) 223-4130</a>
+                    </div>
+
+                    <div class="contact-method">
+                        <strong>Mail</strong>
+                        <div>
+                            Committee to Elect<br>
+                            Denise Dye<br>
+                            5759 E. 156th St.<br>
+                            Noblesville, IN 46062
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: var(--space-6); font-size: var(--font-size-sm); color: var(--text-light);">
+                    <strong>Response Time:</strong> We aim to respond to all messages within 24-48 hours.
+                    For urgent matters, please call our campaign phone number.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+
+            // Basic validation
+            const requiredFields = ['name', 'email', 'subject', 'message'];
+            let isValid = true;
+            let firstInvalidField = null;
+
+            // Clear any existing errors
+            document.querySelectorAll('.error-message').forEach(el => el.remove());
+            document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field);
+                const value = input.value.trim();
+
+                if (!value) {
+                    isValid = false;
+                    input.classList.add('error');
+
+                    // Add error message
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'error-message';
+                    errorDiv.textContent = 'This field is required.';
+                    errorDiv.style.color = '#ef4444';
+                    errorDiv.style.fontSize = '0.875rem';
+                    errorDiv.style.marginTop = '4px';
+                    input.parentNode.insertBefore(errorDiv, input.nextSibling);
+
+                    if (!firstInvalidField) {
+                        firstInvalidField = input;
+                    }
+                }
+            });
+
+            // Email validation
+            const emailField = document.getElementById('email');
+            const emailValue = emailField.value.trim();
+            if (emailValue && !isValidEmail(emailValue)) {
+                isValid = false;
+                emailField.classList.add('error');
+
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.textContent = 'Please enter a valid email address.';
+                errorDiv.style.color = '#ef4444';
+                errorDiv.style.fontSize = '0.875rem';
+                errorDiv.style.marginTop = '4px';
+                emailField.parentNode.insertBefore(errorDiv, emailField.nextSibling);
+
+                if (!firstInvalidField) {
+                    firstInvalidField = emailField;
+                }
+            }
+
+            if (!isValid && firstInvalidField) {
+                firstInvalidField.focus();
+                firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            if (isValid) {
+                // Here you would typically submit to your backend
+                // For now, we'll show a success message
+
+                const formCard = document.querySelector('.form-card');
+                formCard.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <h2 style="color: var(--secondary); margin-bottom: 20px;">Thank You for Your Message!</h2>
+                        <p style="font-size: 18px; margin-bottom: 30px;">
+                            We've received your message and appreciate you taking the time to reach out to us.
+                        </p>
+                        <div style="background: var(--bg); padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                            <h3 style="color: var(--primary); margin-bottom: 15px;">What happens next?</h3>
+                            <ul style="text-align: left; padding-left: 20px;">
+                                <li>You'll receive an email confirmation shortly</li>
+                                <li>We'll review your message within 24-48 hours</li>
+                                <li>If you requested a response, we'll get back to you using your preferred method</li>
+                                <li>For urgent matters, please call the campaign phone line at (317) 223-4130</li>
+                            </ul>
+                        </div>
+                        <p style="color: var(--text-light); margin-bottom: 30px;">
+                            Your input helps us better serve the Noblesville community.
+                        </p>
+                        <a href="../index.html" class="btn btn-primary">Return to Campaign Home</a>
+                        <a href="mailto:denisedye4noblesville@gmail.com" class="btn btn-secondary" style="margin-left: 15px;">Send Another Message</a>
+                    </div>
+                `;
+            }
+        });
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Clear error states on input
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errorMessage = this.parentNode.querySelector('.error-message');
+                if (errorMessage) {
+                    errorMessage.remove();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

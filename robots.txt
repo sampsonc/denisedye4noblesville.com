@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Allow all content to be crawled for maximum visibility
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /forms/
+
+# Block any sensitive or development files
+Disallow: /deployment/
+Disallow: /.git/
+Disallow: /backups/
+
+# Sitemap location
+Sitemap: https://denisedye4noblesville.com/sitemap.xml
+
+# Campaign website for Denise Dye
+# Noblesville School Board 2026

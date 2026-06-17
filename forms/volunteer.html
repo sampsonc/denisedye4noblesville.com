@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer - Denise Dye for School Board</title>
+    <meta name="description" content="Join the campaign! Volunteer for Denise Dye's school board campaign in Noblesville.">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 160px auto 60px;
+            padding: 0 20px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            padding: var(--space-8);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-6);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--space-3);
+            border: 2px solid var(--border);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-base);
+            font-family: var(--font-primary);
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            margin: var(--space-6) 0;
+        }
+
+        .checkbox-group legend {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: var(--space-4);
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-3);
+            padding: var(--space-3);
+            background: var(--bg);
+            border-radius: var(--border-radius);
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--border);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: var(--space-3);
+            transform: scale(1.2);
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .checkbox-item .description {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-top: var(--space-1);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+            margin-top: var(--space-8);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: var(--space-6);
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .required {
+            color: var(--accent);
+        }
+
+        .form-note {
+            background: var(--bg);
+            padding: var(--space-4);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-6);
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <a href="../index.html#get-involved" class="back-link">← Back to Get Involved</a>
+
+        <div class="form-card">
+            <h1>Volunteer for Denise Dye</h1>
+            <p class="section-subtitle">Join our team to support excellent education in Noblesville!</p>
+
+            <div class="form-note">
+                <strong>Thank you for your interest in volunteering!</strong> Every volunteer makes a difference in reaching voters and building support for experienced leadership on our school board.
+            </div>
+
+            <form id="volunteer-form" method="POST" action="#" novalidate>
+                <div class="form-group">
+                    <label for="first-name">First Name <span class="required">*</span></label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last-name">Last Name <span class="required">*</span></label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="(317) 555-0123">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Street address, Noblesville, IN">
+                </div>
+
+                <fieldset class="checkbox-group">
+                    <legend>How would you like to help? (Select all that apply)</legend>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="phone-banking" name="activities" value="phone-banking">
+                        <label for="phone-banking">
+                            <strong>Phone Banking</strong>
+                            <div class="description">Make calls to registered voters from home or campaign office</div>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="canvassing" name="activities" value="canvassing">
+                        <label for="canvassing">
+                            <strong>Door-to-Door Canvassing</strong>
+                            <div class="description">Talk with voters in neighborhoods throughout Noblesville</div>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="events" name="activities" value="events">
+                        <label for="events">
+                            <strong>Event Support</strong>
+                            <div class="description">Help with campaign events, forums, and community meetings</div>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="digital" name="activities" value="digital">
+                        <label for="digital">
+                            <strong>Digital Outreach</strong>
+                            <div class="description">Share on social media and help with online campaign efforts</div>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="yard-signs" name="activities" value="yard-signs">
+                        <label for="yard-signs">
+                            <strong>Yard Sign Distribution</strong>
+                            <div class="description">Help distribute and place campaign signs throughout the community</div>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="data-entry" name="activities" value="data-entry">
+                        <label for="data-entry">
+                            <strong>Data Entry & Admin</strong>
+                            <div class="description">Help with voter database updates and administrative tasks</div>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="other" name="activities" value="other">
+                        <label for="other">
+                            <strong>Other</strong>
+                            <div class="description">I have other skills or ideas to contribute</div>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="availability">When are you available?</label>
+                    <select id="availability" name="availability">
+                        <option value="">Select your availability</option>
+                        <option value="weekday-mornings">Weekday Mornings</option>
+                        <option value="weekday-afternoons">Weekday Afternoons</option>
+                        <option value="weekday-evenings">Weekday Evenings</option>
+                        <option value="weekend-mornings">Weekend Mornings</option>
+                        <option value="weekend-afternoons">Weekend Afternoons</option>
+                        <option value="weekend-evenings">Weekend Evenings</option>
+                        <option value="flexible">Flexible Schedule</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hours">How many hours per week can you volunteer?</label>
+                    <select id="hours" name="hours">
+                        <option value="">Select hours per week</option>
+                        <option value="1-2">1-2 hours</option>
+                        <option value="3-5">3-5 hours</option>
+                        <option value="6-10">6-10 hours</option>
+                        <option value="10+">More than 10 hours</option>
+                        <option value="varies">Varies by week</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Previous volunteer or campaign experience?</label>
+                    <textarea id="experience" name="experience" placeholder="Tell us about any relevant experience or special skills you'd like to share..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="questions">Questions or comments?</label>
+                    <textarea id="questions" name="questions" placeholder="Any questions about volunteering or additional comments..."></textarea>
+                </div>
+
+                <div class="checkbox-item">
+                    <input type="checkbox" id="email-updates" name="email-updates" value="yes" checked>
+                    <label for="email-updates">
+                        <strong>Keep me updated</strong>
+                        <div class="description">Send me campaign updates and volunteer opportunities via email</div>
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Submit Volunteer Form</button>
+                    <a href="../index.html#get-involved" class="btn btn-secondary">Back to Campaign</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('volunteer-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = new FormData(this);
+            const selectedActivities = [];
+            const checkboxes = document.querySelectorAll('input[name="activities"]:checked');
+            checkboxes.forEach(cb => selectedActivities.push(cb.value));
+
+            // Basic validation
+            const requiredFields = ['first-name', 'last-name', 'email'];
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.focus();
+                    return;
+                }
+            });
+
+            if (selectedActivities.length === 0) {
+                alert('Please select at least one volunteer activity.');
+                return;
+            }
+
+            if (isValid) {
+                // Here you would typically submit to your backend
+                // For now, we'll show a success message
+
+                const formCard = document.querySelector('.form-card');
+                formCard.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <h2 style="color: var(--secondary); margin-bottom: 20px;">Thank You for Volunteering!</h2>
+                        <p style="font-size: 18px; margin-bottom: 30px;">
+                            We're excited to have you join our campaign team!
+                            Someone from the volunteer coordinator team will reach out to you within 24-48 hours.
+                        </p>
+                        <div style="background: var(--bg); padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                            <h3 style="color: var(--primary); margin-bottom: 15px;">Next Steps:</h3>
+                            <ul style="text-align: left; padding-left: 20px;">
+                                <li>Check your email for a confirmation message</li>
+                                <li>Our volunteer coordinator will contact you soon</li>
+                                <li>You'll receive training for your selected activities</li>
+                                <li>We'll match you with volunteer opportunities that fit your schedule</li>
+                            </ul>
+                        </div>
+                        <p style="color: var(--text-light); margin-bottom: 30px;">
+                            Questions? Email us at <a href="mailto:denisedye4noblesville@gmail.com">denisedye4noblesville@gmail.com</a>
+                        </p>
+                        <a href="../index.html" class="btn btn-primary">Return to Campaign Home</a>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
