@@ -3,7 +3,7 @@
 Add professional candidate headshots to this directory:
 
 ## Required Files:
-- `denise.PNG` - Professional headshot of Denise Dye
+- `denise.jpg` - Professional headshot of Denise Dye
 
 ## Photo Specifications:
 - **Format:** JPG or PNG

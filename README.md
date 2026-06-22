@@ -35,7 +35,7 @@ sb/
 
 ### 1. Add Candidate Photo
 Place a professional headshot in `images/candidates/`:
-- `denise.PNG` (recommended: 400x400px, professional quality)
+- `denise.jpg` (recommended: 400x400px, professional quality)
 
 ### 2. Update Contact Information
 Edit `index.html` and forms to replace contact details:

@@ -38,7 +38,7 @@ python3 -m http.server 8000
 - `css/main.css` - Complete styling with CSS variables for theming
 - `js/main.js` - Interactive functionality (navigation, forms, animations)
 - `forms/` - Standalone contact and volunteer forms
-- `images/candidates/` - Candidate headshot (denise.PNG)
+- `images/candidates/` - Candidate headshot (denise.jpg)
 - `deployment/` - Deployment automation scripts
 
 ### Styling System
@@ -89,7 +89,7 @@ Current theme uses black and gray-yellow (#d4af37):
 - Candidate photos should be high-quality professional headshots
 - Recommended size: 400x400px minimum
 - Photos are automatically cropped to circles - ensure subjects are centered
-- Current file: `denise.PNG`
+- Current file: `denise.jpg`
 
 ### External Links
 - Polling locations: Hamilton County Precinct Maps
