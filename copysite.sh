@@ -1,8 +1,8 @@
 #!/bin/bash
 #HUGO_ENV=production hugo build --gc --minify --buildFuture
-#git add .
-#git commit -m "changes"
-#git push origin main
+git add .
+git commit -m "changes"
+git push origin main
 rsync -avz --delete -e ssh \
   --exclude '.git' \
   --exclude '.gitignore' \
