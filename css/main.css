@@ -177,6 +177,11 @@ li {
   flex-direction: column;
 }
 
+.nav-brand a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .brand-text {
   font-size: var(--font-size-xl);
   font-weight: 700;
