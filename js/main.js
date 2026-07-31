@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Observe elements for animation
     const animateElements = document.querySelectorAll(
-        '.platform-item, .candidate-profile, .endorsement, .involvement-card, .vote-card'
+        '.platform-item, .candidate-profile, .endorsement, .involvement-card, .vote-card, .event-card'
     );
 
     animateElements.forEach(el => {
@@ -407,7 +407,8 @@ const additionalCSS = `
     .candidate-profile,
     .endorsement,
     .involvement-card,
-    .vote-card {
+    .vote-card,
+    .event-card {
         opacity: 0;
         transform: translateY(30px);
         transition: opacity 0.6s ease, transform 0.6s ease;

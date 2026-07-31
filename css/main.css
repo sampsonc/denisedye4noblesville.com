@@ -600,6 +600,90 @@ section {
   border: 2px solid var(--border);
 }
 
+/* Events Section */
+.events {
+  background-color: white;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.event-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-6);
+  background-color: var(--bg);
+  padding: var(--space-6);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--border);
+  transition: border-color 0.2s ease;
+}
+
+.event-card:hover {
+  border-color: var(--primary);
+}
+
+.event-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 80px;
+  padding: var(--space-3);
+  border-radius: var(--border-radius);
+  background-color: var(--primary);
+  color: var(--secondary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.event-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.event-month {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.event-day {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.event-card h3 {
+  color: var(--primary);
+  margin-bottom: var(--space-2);
+}
+
+.event-meta,
+.event-location {
+  color: var(--text-light);
+  margin-bottom: var(--space-1);
+}
+
+.event-location {
+  margin-bottom: var(--space-4);
+}
+
+.event-description {
+  margin-bottom: var(--space-2);
+}
+
+.event-description:last-child {
+  margin-bottom: 0;
+}
+
 /* Get Involved Section */
 .get-involved {
   background-color: var(--bg);
@@ -862,6 +946,11 @@ section {
 
   .involvement-grid {
     grid-template-columns: 1fr;
+  }
+
+  .event-card {
+    flex-direction: column;
+    gap: var(--space-4);
   }
 
   .newsletter-form {

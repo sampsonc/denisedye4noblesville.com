@@ -78,12 +78,15 @@ Current theme uses black and gray-yellow (#d4af37):
 ## Campaign-Specific Notes
 
 ### Content Areas
-1. Hero section with candidate cards
-2. Detailed candidate profiles with photos and qualifications
-3. Three-pillar platform (Prioritizing Education, Protecting Kids, Partnering with Parents)
-4. Endorsements section
-5. Get involved section with volunteer/contact CTAs
-6. Voting information with Hamilton County polling location links
+Homepage sections, in document order (each is a top-level `<section>` with an `id` matching a nav link):
+1. `#home` — Hero with headline and CTA buttons (platform, get involved, Venmo donation)
+2. `#about` — Candidate profile with photo, qualifications, and link to denise.html
+3. `#platform` — Three-pillar platform (Prioritizing Education, Partnering with Parents, Promoting Financial Responsibility)
+4. `#events` — Upcoming campaign events card grid (currently placeholder entries marked with HTML comments — replace with real events)
+5. `#get-involved` — Volunteer/contact CTAs, plus a nested `#contact` block
+6. `#vote` — Voting information with Hamilton County polling location links
+
+Adding a new section requires: the `<section id>` in index.html, a nav `<li>` in `ul#nav-menu` (index.html **and** the duplicate nav in denise.html), a footer Quick Links entry, and section CSS. Scroll-spy picks up new sections automatically. Scroll-in animation requires adding the card class to **both** hard-coded lists in `js/main.js` (the observer selector and the injected start-state CSS string) — adding to only the CSS list leaves elements permanently invisible.
 
 ### Photo Guidelines
 - Candidate photos should be high-quality professional headshots
