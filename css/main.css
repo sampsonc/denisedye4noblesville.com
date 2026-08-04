@@ -618,8 +618,11 @@ section {
   margin-bottom: var(--space-6);
 }
 
+/* Centered on its own rather than relying on the parent's inherited text-align. */
 .endorsement-cta .btn {
-  margin-bottom: 0;
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .endorsement-logos {

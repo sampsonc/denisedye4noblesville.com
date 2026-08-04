@@ -1,0 +1,3 @@
+[     118ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8767/1a5ae8c8beb7e24874.js:0
+[     127ms] [LOG] Campaign website loaded successfully! @ http://localhost:8767/js/main.js:395
+[     133ms] [LOG] Event tracked: Page Performance - Load Time: 0ms @ http://localhost:8767/js/main.js:300
