@@ -602,6 +602,26 @@ section {
   border-style: dashed;
 }
 
+.endorsement-cta {
+  max-width: 700px;
+  margin: var(--space-12) auto 0;
+  text-align: center;
+}
+
+.endorsement-cta h3 {
+  color: var(--primary);
+  margin-bottom: var(--space-3);
+}
+
+.endorsement-cta p {
+  color: var(--text-light);
+  margin-bottom: var(--space-6);
+}
+
+.endorsement-cta .btn {
+  margin-bottom: 0;
+}
+
 .endorsement-logos {
   text-align: center;
   padding: var(--space-8);
