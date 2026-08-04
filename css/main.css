@@ -535,25 +535,35 @@ section {
 
 /* Endorsements Section */
 .endorsements {
-  background-color: white;
+  background-color: var(--bg);
 }
 
+/* Flex rather than grid: auto-fit redistributes freed space to surviving tracks,
+   so a grid max-track-size can't stop 2 cards from stretching. flex-basis + max-width can. */
 .endorsements-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-8);
-  margin-bottom: var(--space-12);
 }
 
 .endorsement {
-  background-color: var(--bg);
+  flex: 1 1 280px;
+  max-width: 380px;
+  background-color: var(--card-bg);
   padding: var(--space-8);
   border-radius: var(--border-radius-lg);
+  border: 2px solid var(--border);
   position: relative;
+  transition: border-color 0.2s ease;
+}
+
+.endorsement:hover {
+  border-color: var(--primary);
 }
 
 .endorsement:before {
-  content: """;
+  content: "\201C";
   font-size: 4rem;
   color: var(--primary);
   position: absolute;
@@ -571,10 +581,25 @@ section {
 }
 
 .endorsement cite {
+  display: block;
   font-weight: 600;
   color: var(--primary);
   font-style: normal;
   padding-left: var(--space-8);
+}
+
+.endorsement-title {
+  display: block;
+  font-weight: 400;
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
+  margin-top: var(--space-1);
+}
+
+/* Visual marker so unfinished placeholder cards are obvious at a glance.
+   Remove this class from a card once its real endorsement is in place. */
+.endorsement-placeholder {
+  border-style: dashed;
 }
 
 .endorsement-logos {
@@ -982,8 +1007,8 @@ section {
     grid-template-columns: 1fr;
   }
 
-  .endorsements-grid {
-    grid-template-columns: 1fr;
+  .endorsement {
+    max-width: none;
   }
 
   .logo-grid {
