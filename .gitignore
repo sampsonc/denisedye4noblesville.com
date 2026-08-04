@@ -4,3 +4,4 @@
 backups/
 *.bak
 index_bak.html
+.playwright-mcp/
