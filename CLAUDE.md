@@ -19,12 +19,13 @@ python3 -m http.server 8000
 
 ### Deployment
 ```bash
-# Quick git deployment
-./deployment/push.sh
-
-# Full production deployment with optimization
-./deployment/copysite.sh --deploy
+# The only deploy path. Takes no arguments.
+./copysite.sh
 ```
+
+`copysite.sh` does four things in order: `git add .` + commit (message is always
+"changes") + push to `origin main`, rsync to `chs@chs.us:/home/chs/denisedye4noblesville.com`,
+then ping IndexNow. Because it stages everything, check `git status` before running it.
 
 ### Testing
 - No automated tests - manual browser testing required
@@ -39,7 +40,8 @@ python3 -m http.server 8000
 - `js/main.js` - Interactive functionality (navigation, forms, animations)
 - `forms/` - Standalone contact and volunteer forms
 - `images/candidates/` - Candidate headshot (denise.jpg)
-- `deployment/` - Deployment automation scripts
+- `copysite.sh` - The deploy script (commit, push, rsync, IndexNow ping)
+- `deployment/nginx/` - Production nginx config, version-controlled here but not deployed by `copysite.sh`
 
 ### Styling System
 - Uses CSS custom properties (variables) for consistent theming
@@ -101,4 +103,10 @@ Adding a new section requires: the `<section id>` in index.html, a nav `<li>` in
 
 ## Deployment Notes
 
-The site is designed for static hosting and requires no server-side processing. Deployment scripts handle git commits and can be extended for rsync to production servers. The site is optimized for fast loading and mobile performance.
+The site is designed for static hosting and requires no server-side processing. `copysite.sh`
+handles the git commit and rsyncs to production, excluding `.git`, `.claude`, `*.md`, `*.bak`,
+`deployment/`, `backups/`, and the script itself. The site is optimized for fast loading and
+mobile performance.
+
+Note that `*.md` is excluded from the rsync, so CLAUDE.md edits never reach the web server —
+they only travel through git.
