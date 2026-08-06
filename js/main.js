@@ -265,6 +265,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
+    // Hide Past Events
+    // Each dated .event-card carries data-event-date="YYYY-MM-DD". A card stays visible all
+    // day on its date and disappears the following day, so the events list prunes itself.
+    // Cards without the attribute (recurring or open-ended entries) are never hidden.
+    function hidePastEvents() {
+        const eventsList = document.querySelector('.events-list');
+        if (!eventsList) return;
+
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+        eventsList.querySelectorAll('.event-card[data-event-date]').forEach(card => {
+            const parts = card.dataset.eventDate.split('-');
+            if (parts.length !== 3) return;
+
+            // Build the date from parts rather than parsing the string directly: the Date
+            // constructor treats a bare "YYYY-MM-DD" as UTC midnight, which lands on the
+            // previous day in Eastern time and would hide events a day early.
+            const eventDay = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+            if (isNaN(eventDay.getTime())) return;
+
+            if (eventDay < today) {
+                card.hidden = true;
+            }
+        });
+
+        const emptyMessage = eventsList.querySelector('.events-empty');
+        if (emptyMessage && !eventsList.querySelector('.event-card:not([hidden])')) {
+            emptyMessage.hidden = false;
+        }
+    }
+
+    hidePastEvents();
+
     // Intersection Observer for Animation on Scroll
     const observerOptions = {
         threshold: 0.1,

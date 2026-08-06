@@ -676,6 +676,21 @@ section {
   border-color: var(--primary);
 }
 
+/* main.js sets [hidden] on past events. This rule is required, not redundant: the
+   browser default of [hidden] { display: none } loses to .event-card { display: flex },
+   so without it a hidden card would still render. */
+.event-card[hidden],
+.events-empty[hidden] {
+  display: none;
+}
+
+.events-empty {
+  text-align: center;
+  color: var(--text-light);
+  font-size: var(--font-size-lg);
+  padding: var(--space-8) 0;
+}
+
 .event-date {
   display: flex;
   flex-direction: column;
