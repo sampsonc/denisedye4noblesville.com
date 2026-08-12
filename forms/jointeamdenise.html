@@ -7,6 +7,10 @@
     <meta name="description" content="Join Team Denise. Sign up to volunteer for Denise Dye's Noblesville School Board campaign - door knocking, yard signs, events, and more.">
     <link rel="stylesheet" href="../css/main.css">
     <style>
+        /* Top margin clears the fixed header, which is ~138px on desktop and ~143px down to
+           the 480px breakpoint. Below that the brand text and election banner both wrap and
+           the header grows to ~173px, so the narrow-screen override further down INCREASES
+           this rather than reducing it. If the banner wording changes, re-check both. */
         .form-container {
             max-width: 600px;
             margin: 160px auto 60px;
@@ -215,8 +219,9 @@
         }
 
         @media (max-width: 480px) {
+            /* Header is TALLER here (~173px), not shorter - see note above. */
             .form-container {
-                margin-top: 120px;
+                margin-top: 195px;
             }
 
             .form-card {
@@ -236,6 +241,35 @@
     <script async data-id="101507558" src="/1a5ae8c8beb7e24874.js"></script>
 </head>
 <body>
+    <!-- Navigation Header -->
+    <!-- Mirrors the header on index.html. Links are prefixed with ../index.html because this
+         page lives in forms/; the anchors alone would resolve against this page. -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" aria-label="Denise Dye for Noblesville School Board — home"><span class="brand-text">Denise Dye<br>for Noblesville School Board</span></a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li><a href="../index.html#platform" class="nav-link">Platform</a></li>
+                <li><a href="../index.html#events" class="nav-link">Events</a></li>
+                <li><a href="../index.html#endorsements" class="nav-link">Endorsements</a></li>
+                <li><a href="../index.html#get-involved" class="nav-link">Get Involved</a></li>
+                <li><a href="../index.html#join" class="nav-link">Join</a></li>
+                <li><a href="../index.html#vote" class="nav-link">Vote</a></li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+        <div class="election-banner">
+            <strong>Early voting begins on October 9.  Election day - Tuesday, November 3rd.</strong>
+        </div>
+    </header>
+
     <div class="form-container">
         <a href="../index.html#join" class="back-link">&larr; Back to Campaign</a>
 
@@ -505,6 +539,36 @@
             </form>
         </div>
     </div>
+
+    <!-- Footer -->
+    <!-- Mirrors the footer on index.html, with ../index.html prefixes for this subdirectory. -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Denise Dye for School Board</h4>
+                    <p>Experienced leadership for Noblesville Schools</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html#platform">My Platform</a></li>
+                        <li><a href="../index.html#about">About Me</a></li>
+                        <li><a href="../index.html#events">Events</a></li>
+                        <li><a href="../index.html#endorsements">Endorsements</a></li>
+                        <li><a href="../index.html#get-involved">Volunteer</a></li>
+                        <li><a href="../index.html#join">Join Team Denise</a></li>
+                        <li><a href="../index.html#vote">Vote</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Denise Dye for School Board. Paid for by the Committee to Elect Denise Dye.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="../js/main.js"></script>
     <script src="../js/jointeamdenise.js"></script>
