@@ -101,9 +101,22 @@ Homepage sections, in document order (each is a top-level `<section>` with an `i
 3. `#platform` — Three-pillar platform (Prioritizing Education, Partnering with Parents, Promoting Financial Responsibility)
 4. `#events` — Upcoming campaign events card grid (currently placeholder entries marked with HTML comments — replace with real events)
 5. `#endorsements` — Endorsement cards plus a CTA linking to the endorsement Google Form
-6. `#get-involved` — Volunteer/contact CTAs, plus a nested `#contact` block
-7. `#join` — Dark "Join Team Denise" CTA band; pitch only, links to `forms/jointeamdenise.html`
+6. `#join` — Dark "Join Team Denise" CTA band; pitch only, links to `forms/jointeamdenise.html`
+7. `#contact` — Email, phone, and mailing address
 8. `#vote` — Voting information with Hamilton County polling location links
+
+There was previously a `#get-involved` section between endorsements and vote, holding three
+`.involvement-card` blocks (Volunteer / Spread the Word / Stay Informed) that all linked to the
+old volunteer Google Form. It was removed on 2026-08-12 once `forms/jointeamdenise.html`
+superseded it; the contact block nested inside it was kept and promoted to the `#contact`
+section above. Restore the cards from the `pre-remove-get-involved` git tag if needed — their
+CSS (`.get-involved`, `.involvement-grid`, `.involvement-card`) is still in main.css, and
+`#contact` still uses the `.get-involved` class for its section background.
+
+Nav labels are near the width limit: at 1200px, eight items fit on one line only just. Adding
+a ninth item, or lengthening a label, wraps two items onto a second line and grows the fixed
+header from 138px to 170px — which in turn pushes content under the header on pages that set a
+fixed top offset (see `forms/jointeamdenise.html`). Check the header height after any nav edit.
 
 Adding a new section requires: the `<section id>` in index.html, a nav `<li>` in `ul#nav-menu` (index.html **and** the duplicate nav in denise.html), a footer Quick Links entry, and section CSS. Scroll-spy picks up new sections automatically. Scroll-in animation requires adding the card class to **both** hard-coded lists in `js/main.js` (the observer selector and the injected start-state CSS string) — adding to only the CSS list leaves elements permanently invisible.
 
