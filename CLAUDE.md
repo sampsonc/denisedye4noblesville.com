@@ -67,8 +67,23 @@ then ping IndexNow. Because it stages everything, check `git status` before runn
 ### Forms
 - Client-side validation only (no backend integration)
 - Newsletter signup in main page
-- Separate volunteer.html and contact.html forms
+- Separate volunteer.html, contact.html, and jointeamdenise.html forms
 - Form styling uses consistent campaign theme colors
+- `forms/jointeamdenise.html` is the current volunteer signup (the `#join` section links to
+  it). Its `<form action="">` is deliberately **blank** — no endpoint is wired yet, so a
+  valid submit shows a "sign-ups aren't open just yet" notice instead of sending. To
+  activate: paste an endpoint URL (e.g. Formspree) into `action` and uncomment the three
+  hidden fields directly below the opening tag. The notice removes itself automatically once
+  `action` is non-empty; no other edit is needed.
+- Its field names are the contract for downstream automation: checkboxes repeat their name
+  (`help`, `availability`, `skills`), radios send one value (`frequency`, `sms_consent`).
+- The SMS consent wording is generic TCPA language. Name the actual sending program and
+  confirm the opt-out text once an SMS provider is chosen — see the TODO in section 5.
+- `thank-you.html` (repo root, `noindex`) is the post-submit confirmation page, reached via
+  the commented-out `_next` hidden field. It is unreachable until the endpoint is wired.
+- `js/main.js` guards every nav/header lookup because the standalone `forms/` pages load it
+  without a nav header; before those guards a null dereference aborted the whole
+  DOMContentLoaded handler and silently disabled form validation on all form pages.
 
 ### Color Scheme
 Current theme uses black and gray-yellow (#d4af37):
@@ -85,8 +100,10 @@ Homepage sections, in document order (each is a top-level `<section>` with an `i
 2. `#about` — Candidate profile with photo, qualifications, and link to denise.html
 3. `#platform` — Three-pillar platform (Prioritizing Education, Partnering with Parents, Promoting Financial Responsibility)
 4. `#events` — Upcoming campaign events card grid (currently placeholder entries marked with HTML comments — replace with real events)
-5. `#get-involved` — Volunteer/contact CTAs, plus a nested `#contact` block
-6. `#vote` — Voting information with Hamilton County polling location links
+5. `#endorsements` — Endorsement cards plus a CTA linking to the endorsement Google Form
+6. `#get-involved` — Volunteer/contact CTAs, plus a nested `#contact` block
+7. `#join` — Dark "Join Team Denise" CTA band; pitch only, links to `forms/jointeamdenise.html`
+8. `#vote` — Voting information with Hamilton County polling location links
 
 Adding a new section requires: the `<section id>` in index.html, a nav `<li>` in `ul#nav-menu` (index.html **and** the duplicate nav in denise.html), a footer Quick Links entry, and section CSS. Scroll-spy picks up new sections automatically. Scroll-in animation requires adding the card class to **both** hard-coded lists in `js/main.js` (the observer selector and the injected start-state CSS string) — adding to only the CSS list leaves elements permanently invisible.
 

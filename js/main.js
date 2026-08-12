@@ -6,28 +6,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    // Toggle mobile menu
-    navToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking a nav link
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+    // The standalone pages under forms/ load this script but have no nav header, so every
+    // nav interaction is guarded. Without the guard the null dereference here throws and
+    // aborts the rest of this handler, taking form validation down with it.
+    if (navToggle && navMenu) {
+        // Toggle mobile menu
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
         });
-    });
 
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', function(event) {
-        const isClickInsideNav = navMenu.contains(event.target) || navToggle.contains(event.target);
-        if (!isClickInsideNav && navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
-        }
-    });
+        // Close mobile menu when clicking a nav link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navMenu.contains(event.target) || navToggle.contains(event.target);
+            if (!isClickInsideNav && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+    }
 
     // Smooth Scrolling for Anchor Links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -78,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('header');
 
     function updateHeaderBackground() {
+        if (!header) return; // No header on the standalone forms/ pages.
         if (window.scrollY > 100) {
             header.classList.add('scrolled');
         } else {
@@ -314,8 +320,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Observe elements for animation
+    // NOTE: this selector and the start-state CSS in `additionalCSS` below must stay in
+    // sync. An element listed only in the CSS starts hidden and is never revealed.
     const animateElements = document.querySelectorAll(
-        '.platform-item, .candidate-profile, .endorsement, .involvement-card, .vote-card, .event-card'
+        '.platform-item, .candidate-profile, .endorsement, .involvement-card, .vote-card, .event-card, .join-team-card'
     );
 
     animateElements.forEach(el => {
@@ -412,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enhanced keyboard navigation
     document.addEventListener('keydown', function(e) {
         // Escape key closes mobile menu
-        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
             navMenu.classList.remove('active');
             navToggle.classList.remove('active');
         }
@@ -442,7 +450,8 @@ const additionalCSS = `
     .endorsement,
     .involvement-card,
     .vote-card,
-    .event-card {
+    .event-card,
+    .join-team-card {
         opacity: 0;
         transform: translateY(30px);
         transition: opacity 0.6s ease, transform 0.6s ease;

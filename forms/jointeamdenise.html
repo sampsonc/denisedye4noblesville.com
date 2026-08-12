@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Team Denise - Denise Dye for School Board</title>
+    <meta name="description" content="Join Team Denise. Sign up to volunteer for Denise Dye's Noblesville School Board campaign - door knocking, yard signs, events, and more.">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .form-container {
+            max-width: 600px;
+            margin: 160px auto 60px;
+            padding: 0 20px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            padding: var(--space-8);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-6);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--space-3);
+            border: 2px solid var(--border);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-base);
+            font-family: var(--font-primary);
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            margin: var(--space-6) 0;
+            border: none;
+        }
+
+        .checkbox-group legend {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: var(--space-4);
+        }
+
+        /* The numbered steps read at one level whether they're an <h2> (steps 1 and 6) or a
+           fieldset <legend> (steps 2-5). Unnumbered sub-questions keep the smaller default. */
+        .checkbox-group legend.section-legend {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-2);
+        }
+
+        fieldset:has(> .section-legend) {
+            margin-top: var(--space-10);
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-3);
+            padding: var(--space-3);
+            background: var(--bg);
+            border-radius: var(--border-radius);
+            border: 2px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .checkbox-item:hover,
+        .radio-item:hover {
+            border-color: var(--border);
+        }
+
+        .checkbox-item input[type="checkbox"],
+        .radio-item input[type="radio"] {
+            width: auto;
+            margin-right: var(--space-3);
+            transform: scale(1.2);
+            flex-shrink: 0;
+        }
+
+        .checkbox-item label,
+        .radio-item label {
+            margin: 0;
+            cursor: pointer;
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .checkbox-item .description,
+        .radio-item .description {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            margin-top: var(--space-1);
+            font-weight: 400;
+        }
+
+        /* "Other:" free-text field, indented under its checkbox */
+        .other-skill-input {
+            margin: var(--space-2) 0 var(--space-3) var(--space-8);
+        }
+
+        .other-skill-input input {
+            width: 100%;
+            padding: var(--space-2) var(--space-3);
+            border: 2px solid var(--border);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-base);
+            font-family: var(--font-primary);
+        }
+
+        .other-skill-input input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Accessible name for the "Other" skill field, which is labelled visually by the
+           checkbox above it. main.css has no visually-hidden utility, so define one here. */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Required-by-law consent wording. Kept visually quiet but never hidden. */
+        .consent-fine-print {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-top: var(--space-3);
+        }
+
+        .subsection-heading {
+            font-weight: 600;
+            color: var(--text);
+            margin: var(--space-8) 0 var(--space-4);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: var(--space-4);
+            justify-content: center;
+            margin-top: var(--space-8);
+            flex-wrap: wrap;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: var(--space-6);
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .required {
+            color: var(--accent);
+        }
+
+        .form-note {
+            background: var(--bg);
+            padding: var(--space-4);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--space-6);
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+        }
+
+        .optional-note {
+            font-size: var(--font-size-sm);
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: var(--space-4);
+        }
+
+        /* Validation errors raised for a whole fieldset rather than a single input */
+        .group-error {
+            color: #ef4444;
+            font-size: var(--font-size-sm);
+            margin-top: var(--space-2);
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                margin-top: 120px;
+            }
+
+            .form-card {
+                padding: var(--space-5);
+            }
+
+            .other-skill-input {
+                margin-left: var(--space-4);
+            }
+
+            .other-skill-input input {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script async data-id="101507558" src="/1a5ae8c8beb7e24874.js"></script>
+</head>
+<body>
+    <div class="form-container">
+        <a href="../index.html#join" class="back-link">&larr; Back to Campaign</a>
+
+        <div class="form-card">
+            <h1>Join Team Denise</h1>
+            <p class="section-subtitle">Want to help make a difference for Noblesville students and families?</p>
+
+            <div class="form-note">
+                <strong>There are lots of ways to get involved</strong> &mdash; whether you have 30 minutes or several hours a week. Tell us a little about yourself and how you'd like to help, and we'll match you with the work that fits.
+            </div>
+
+            <!-- SUBMISSION ENDPOINT NOT YET WIRED.
+                 action="" is intentionally blank - this form does not send anywhere yet.
+                 To activate: create the endpoint (e.g. at formspree.io), paste its URL into
+                 action="" below, and uncomment the three hidden fields that follow. Nothing
+                 else on this page needs to change - the "not yet connected" notice in the
+                 submit handler removes itself automatically once action is non-empty.
+
+                 Field names are already in their final shape for downstream automation:
+                 checkboxes repeat their name (help, availability, skills) once per checked
+                 box; radios (frequency, sms_consent) send a single value. -->
+            <form id="join-team-form" method="POST" action="" novalidate>
+
+                <!-- Enable together with the action URL above:
+                <input type="hidden" name="_subject" value="New Team Denise volunteer">
+                <input type="hidden" name="_next" value="https://denisedye4noblesville.com/thank-you.html">
+                <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+                -->
+
+                <!-- 1. Contact Information -->
+                <h2 class="subsection-heading">1. Contact Information</h2>
+
+                <div class="form-group">
+                    <label for="first-name">First Name <span class="required">*</span></label>
+                    <input type="text" id="first-name" name="first_name" autocomplete="given-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last-name">Last Name <span class="required">*</span></label>
+                    <input type="text" id="last-name" name="last_name" autocomplete="family-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile-phone">Mobile Phone <span class="required">*</span></label>
+                    <input type="tel" id="mobile-phone" name="mobile_phone" autocomplete="tel" placeholder="(317) 555-0123" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="neighborhood">Neighborhood / Area</label>
+                    <input type="text" id="neighborhood" name="neighborhood" placeholder="Optional &mdash; helps us assign work close to home">
+                </div>
+
+                <!-- 2. How would you like to help? -->
+                <fieldset class="checkbox-group" id="help-group">
+                    <legend class="section-legend">2. How would you like to help? <span class="required">*</span></legend>
+                    <p class="optional-note">Select all that apply.</p>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="help-door-knocking" name="help" value="door-knocking">
+                        <label for="help-door-knocking"><span class="way-icon">&#128682;</span>Door Knocking</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="help-yard-signs" name="help" value="yard-signs">
+                        <label for="help-yard-signs"><span class="way-icon">&#129706;</span>Yard Signs
+                            <div class="description">Delivery and pickup</div>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="help-events" name="help" value="events-parades">
+                        <label for="help-events"><span class="way-icon">&#127914;</span>Events &amp; Parades</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="help-social" name="help" value="social-media">
+                        <label for="help-social"><span class="way-icon">&#128241;</span>Social Media</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="help-calls" name="help" value="phone-calls">
+                        <label for="help-calls"><span class="way-icon">&#128222;</span>Phone Calls</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="help-literature" name="help" value="literature">
+                        <label for="help-literature"><span class="way-icon">&#128196;</span>Literature Distribution</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="help-admin" name="help" value="admin">
+                        <label for="help-admin"><span class="way-icon">&#128187;</span>Behind-the-Scenes / Administrative</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="help-photo" name="help" value="photo-video">
+                        <label for="help-photo"><span class="way-icon">&#128248;</span>Photography / Video</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="help-whatever" name="help" value="whatever-needed">
+                        <label for="help-whatever">Whatever is needed</label>
+                    </div>
+                </fieldset>
+
+                <!-- 3. Availability -->
+                <fieldset class="checkbox-group">
+                    <legend class="section-legend">3. When are you generally available?</legend>
+                    <p class="optional-note">Select all that apply.</p>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="avail-weekday-am" name="availability" value="weekday-am">
+                        <label for="avail-weekday-am">Weekday mornings</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="avail-weekday-pm" name="availability" value="weekday-pm">
+                        <label for="avail-weekday-pm">Weekday afternoons</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="avail-weekday-eve" name="availability" value="weekday-eve">
+                        <label for="avail-weekday-eve">Weekday evenings</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="avail-saturday-am" name="availability" value="saturday-am">
+                        <label for="avail-saturday-am">Saturday mornings</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="avail-saturday-pm" name="availability" value="saturday-pm">
+                        <label for="avail-saturday-pm">Saturday afternoons</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="avail-saturday-eve" name="availability" value="saturday-eve">
+                        <label for="avail-saturday-eve">Saturday evenings</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="avail-sunday" name="availability" value="sunday">
+                        <label for="avail-sunday">Sunday</label>
+                    </div>
+                </fieldset>
+
+                <fieldset class="checkbox-group">
+                    <legend>How often would you like to help?</legend>
+
+                    <div class="radio-item">
+                        <input type="radio" id="freq-one-time" name="frequency" value="one-time">
+                        <label for="freq-one-time">One-time / occasionally</label>
+                    </div>
+
+                    <div class="radio-item">
+                        <input type="radio" id="freq-few-monthly" name="frequency" value="few-monthly">
+                        <label for="freq-few-monthly">A few times a month</label>
+                    </div>
+
+                    <div class="radio-item">
+                        <input type="radio" id="freq-weekly" name="frequency" value="weekly">
+                        <label for="freq-weekly">Weekly</label>
+                    </div>
+
+                    <div class="radio-item">
+                        <input type="radio" id="freq-regular" name="frequency" value="regular">
+                        <label for="freq-regular">I'm ready to help regularly</label>
+                    </div>
+                </fieldset>
+
+                <!-- 4. Volunteer Skills -->
+                <fieldset class="checkbox-group">
+                    <legend class="section-legend">4. Volunteer Skills</legend>
+                    <p class="optional-note">Optional &mdash; do you have any skills or experience you'd like to contribute?</p>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill-social" name="skills" value="social-media">
+                        <label for="skill-social">Social media</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill-design" name="skills" value="graphic-design">
+                        <label for="skill-design">Graphic design</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill-photo" name="skills" value="photo-video">
+                        <label for="skill-photo">Photography / video</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill-writing" name="skills" value="writing">
+                        <label for="skill-writing">Writing</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill-events" name="skills" value="event-planning">
+                        <label for="skill-events">Event planning</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill-tech" name="skills" value="technology">
+                        <label for="skill-tech">Technology / website</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill-org" name="skills" value="organization">
+                        <label for="skill-org">Organization / administration</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill-fundraising" name="skills" value="fundraising">
+                        <label for="skill-fundraising">Fundraising</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="skill-other" name="skills" value="other">
+                        <label for="skill-other">Other</label>
+                    </div>
+
+                    <div class="other-skill-input">
+                        <label class="sr-only" for="skills-other">Please describe your other skill</label>
+                        <input type="text" id="skills-other" name="skills_other" placeholder="Tell us what you'd bring">
+                    </div>
+                </fieldset>
+
+                <!-- 5. Text Messaging
+                     TODO: once an SMS provider is chosen, name the sending program/short code
+                     here and confirm this wording matches that provider's required consent
+                     and opt-out language. Do not treat a checked box as blanket permission. -->
+                <fieldset class="checkbox-group" id="sms-group">
+                    <legend class="section-legend">5. Text Messaging <span class="required">*</span></legend>
+                    <p class="optional-note">Would you like to receive text messages about volunteer opportunities, assignments, and reminders?</p>
+
+                    <div class="radio-item">
+                        <input type="radio" id="sms-yes" name="sms_consent" value="yes">
+                        <label for="sms-yes">Yes &mdash; I agree to receive campaign text messages from Denise Dye for School Board at the mobile number above, including volunteer opportunities, assignments, and reminders.</label>
+                    </div>
+
+                    <div class="radio-item">
+                        <input type="radio" id="sms-no" name="sms_consent" value="no">
+                        <label for="sms-no">No, email only.</label>
+                    </div>
+
+                    <p class="consent-fine-print">
+                        Msg &amp; data rates may apply. Message frequency varies. Reply STOP to opt out or HELP for help. Consent is not a condition of volunteering.
+                    </p>
+                </fieldset>
+
+                <!-- 6. Anything else? -->
+                <h2 class="subsection-heading">6. Anything else?</h2>
+
+                <div class="form-group">
+                    <label for="notes">Is there anything you'd like us to know?</label>
+                    <textarea id="notes" name="notes" placeholder="Questions, ideas, scheduling notes &mdash; anything at all."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Join Team Denise</button>
+                    <a href="../index.html" class="btn btn-secondary">Back to Campaign</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Validation for things main.js can't check on its own: main.js already handles
+        // per-field blur validation (required, email format, phone format) for every input
+        // on the page, so this only guards whole-group rules and the final submit.
+        (function () {
+            const form = document.getElementById('join-team-form');
+
+            function clearGroupError(fieldset) {
+                const existing = fieldset.querySelector('.group-error');
+                if (existing) existing.remove();
+            }
+
+            function showGroupError(fieldset, message) {
+                clearGroupError(fieldset);
+                const div = document.createElement('div');
+                div.className = 'group-error';
+                div.textContent = message;
+                fieldset.appendChild(div);
+            }
+
+            // Clear a group error as soon as the visitor answers that group.
+            form.querySelectorAll('input[name="help"], input[name="sms_consent"]').forEach(input => {
+                input.addEventListener('change', function () {
+                    clearGroupError(this.closest('fieldset'));
+                });
+            });
+
+            form.addEventListener('submit', function (e) {
+                let firstInvalid = null;
+
+                // Re-evaluate from scratch so messages resolved since the last attempt go away.
+                form.querySelectorAll('.group-error').forEach(el => el.remove());
+
+                // Required text fields.
+                ['first-name', 'last-name', 'email', 'mobile-phone'].forEach(id => {
+                    const input = document.getElementById(id);
+                    const value = input.value.trim();
+                    let message = '';
+
+                    if (!value) {
+                        message = 'This field is required.';
+                    } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                        message = 'Please enter a valid email address.';
+                    } else if (input.type === 'tel' && !/^[\+]?[\s\-\(\)]?[\d\s\-\(\)]{10,}$/.test(value)) {
+                        message = 'Please enter a valid phone number.';
+                    }
+
+                    if (message) {
+                        input.classList.add('error');
+                        const existing = input.parentNode.querySelector('.error-message');
+                        if (existing) existing.remove();
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'error-message';
+                        errorDiv.textContent = message;
+                        input.parentNode.insertBefore(errorDiv, input.nextSibling);
+                        if (!firstInvalid) firstInvalid = input;
+                    }
+                });
+
+                // At least one way to help.
+                const helpGroup = document.getElementById('help-group');
+                if (!form.querySelector('input[name="help"]:checked')) {
+                    showGroupError(helpGroup, 'Please select at least one way you would like to help.');
+                    if (!firstInvalid) firstInvalid = helpGroup.querySelector('input[name="help"]');
+                }
+
+                // A text-messaging answer, either way. Silence is not consent.
+                const smsGroup = document.getElementById('sms-group');
+                if (!form.querySelector('input[name="sms_consent"]:checked')) {
+                    showGroupError(smsGroup, 'Please let us know whether we may text you.');
+                    if (!firstInvalid) firstInvalid = document.getElementById('sms-yes');
+                }
+
+                if (firstInvalid) {
+                    e.preventDefault();
+                    firstInvalid.focus();
+                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+
+                // Temporary: with no action URL, a native submit would just reload the page
+                // and look like the form silently failed. This branch disappears on its own
+                // the moment a real endpoint is pasted into action="".
+                if (!form.getAttribute('action')) {
+                    e.preventDefault();
+                    document.querySelector('.form-card').innerHTML = `
+                        <div style="text-align: center; padding: 40px;">
+                            <h2 style="color: var(--secondary); margin-bottom: 20px;">Sign-ups aren't open just yet</h2>
+                            <p style="font-size: 18px; margin-bottom: 30px;">
+                                We're putting the finishing touches on our volunteer system and this
+                                form isn't accepting submissions yet. Please check back shortly &mdash;
+                                or reach out directly and we'll get you on the list right now.
+                            </p>
+                            <p style="margin-bottom: 30px;">
+                                <a href="mailto:denisedye4noblesville@gmail.com">denisedye4noblesville@gmail.com</a>
+                                &nbsp;&middot;&nbsp;
+                                <a href="tel:+13172234130">(317) 223-4130</a>
+                            </p>
+                            <a href="../index.html" class="btn btn-primary">Return to Campaign Home</a>
+                        </div>
+                    `;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                // Otherwise the form submits natively to its action URL.
+            });
+        })();
+    </script>
+</body>
+</html>
