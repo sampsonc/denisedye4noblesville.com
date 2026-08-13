@@ -32,23 +32,6 @@
         fieldset.appendChild(div);
     }
 
-    // Today at local midnight. Built from parts rather than parsing a "YYYY-MM-DD" string,
-    // because the Date constructor reads that as UTC midnight, which lands on the previous
-    // day in Eastern time - the same trap the events auto-hide in main.js documents.
-    function localToday() {
-        const now = new Date();
-        return new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    }
-
-    function isoDate(d) {
-        const pad = n => String(n).padStart(2, '0');
-        return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
-    }
-
-    // Stop the picker offering dates already past. Set here rather than in the HTML so it
-    // stays correct tomorrow.
-    const dateInput = document.getElementById('requested-date');
-    dateInput.min = isoDate(localToday());
 
     function showFieldError(input, message) {
         input.classList.add('error');
@@ -89,21 +72,6 @@
                 if (!firstInvalid) firstInvalid = input;
             }
         });
-
-        // Requested date is optional, but if given it has to be one we can still act on.
-        // Compared as date parts so a same-day request is accepted, not rejected as past.
-        if (dateInput.value) {
-            const parts = dateInput.value.split('-');
-            const requested = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
-
-            if (isNaN(requested.getTime())) {
-                showFieldError(dateInput, 'Please enter a valid date.');
-                if (!firstInvalid) firstInvalid = dateInput;
-            } else if (requested < localToday()) {
-                showFieldError(dateInput, 'Please choose today or a later date.');
-                if (!firstInvalid) firstInvalid = dateInput;
-            }
-        }
 
         return firstInvalid;
     }
