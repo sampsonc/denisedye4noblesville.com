@@ -124,17 +124,13 @@
                     </select>
                 </div>
 
-                <fieldset class="checkbox-group" id="permission-group">
-                    <legend>Placement permission <span class="required">*</span></legend>
-
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="permission" name="permission" value="yes">
-                        <label for="permission">
-                            I own this property, or I have the owner's permission to place a sign here.
-                            <div class="description">We can't place signs on rental property, HOA common areas, or public right-of-way without permission.</div>
-                        </label>
-                    </div>
-                </fieldset>
+                <div class="form-group">
+                    <label for="requested-date">When would you like it?</label>
+                    <!-- min is set to today by js/yardsign.js so past dates can't be picked;
+                         hardcoding a date here would go stale the next day. -->
+                    <input type="date" id="requested-date" name="requested_date">
+                    <p class="optional-note" style="margin-top: var(--space-2); margin-bottom: 0;">Optional &mdash; leave blank and we'll bring it as soon as we can.</p>
+                </div>
 
                 <!-- 4. Anything else -->
                 <h2 class="subsection-heading">4. Anything else?</h2>

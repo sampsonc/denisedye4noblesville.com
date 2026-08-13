@@ -136,6 +136,22 @@ li {
   box-shadow: 0 4px 12px var(--shadow-hover);
 }
 
+/* Outline button for dark backgrounds. .btn-secondary is --secondary (#1a1a1a), the same
+   colour as the Join band, so it would be invisible there. */
+.btn-outline-light {
+  background-color: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-outline-light:hover {
+  background-color: var(--primary);
+  color: var(--secondary);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
 .btn-secondary {
   background-color: var(--secondary);
   color: white;
@@ -878,29 +894,25 @@ section {
   font-size: var(--font-size-sm);
 }
 
-/* Secondary path out of the Join band, for people who only want a sign. */
-.join-secondary {
-  margin: var(--space-6) 0 0;
-  color: #d8d8d8;
-  font-size: var(--font-size-sm);
+/* Two paths out of the Join band: sign up to help, or just ask for a sign. Side by side on
+   desktop, stacked on narrow screens. */
+.join-actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.join-secondary a {
-  color: var(--primary);
-  text-decoration: underline;
-}
-
-.join-secondary a:hover {
-  color: var(--primary-light);
-}
-
-/* Centered on its own rather than relying on inherited text-align. */
-.join-team-card .btn {
-  display: block;
-  width: fit-content;
-  margin: 0 auto;
+.join-actions .btn {
   font-size: var(--font-size-lg);
   padding: var(--space-4) var(--space-8);
+}
+
+@media (max-width: 480px) {
+  .join-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 @media (max-width: 480px) {
