@@ -1,17 +1,23 @@
-// Join Team Denise - signup form validation and submission.
+// Yard sign request form - validation and submission.
 //
-// This lives in its own file rather than inline in the page on purpose: production nginx
-// sends `script-src 'self' static.getclicky.com` with no 'unsafe-inline', so an inline
-// <script> is silently blocked and the form loses all validation. Keep this external.
+// Lives in its own file rather than inline: production nginx sends
+// `script-src 'self' static.getclicky.com` with no 'unsafe-inline', so an inline <script>
+// is silently blocked and the form loses all validation. Keep this external.
 //
 // main.js already handles per-field blur validation (required, email format, phone format)
-// for every input on the page, so this file only guards whole-group rules and the submit.
+// for every input on the page, so this file only guards the submit and the rules main.js
+// cannot know about.
 
 (function () {
-    const form = document.getElementById('join-team-form');
+    const form = document.getElementById('yard-sign-form');
     if (!form) return;
 
-    const THANK_YOU_URL = '/thank-you.html';
+    const THANK_YOU_URL = '/thank-you-yardsign.html';
+
+    const REQUIRED_TEXT_FIELDS = [
+        'first-name', 'last-name', 'email', 'mobile-phone',
+        'street-address', 'city', 'zip'
+    ];
 
     function clearGroupError(fieldset) {
         const existing = fieldset.querySelector('.group-error');
@@ -26,12 +32,20 @@
         fieldset.appendChild(div);
     }
 
-    // Clear a group error as soon as the visitor answers that group.
-    form.querySelectorAll('input[name="help"], input[name="sms_consent"]').forEach(input => {
-        input.addEventListener('change', function () {
-            clearGroupError(this.closest('fieldset'));
-        });
+    // Clear the permission error as soon as the box is ticked.
+    form.querySelector('#permission').addEventListener('change', function () {
+        clearGroupError(this.closest('fieldset'));
     });
+
+    function showFieldError(input, message) {
+        input.classList.add('error');
+        const existing = input.parentNode.querySelector('.error-message');
+        if (existing) existing.remove();
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        input.parentNode.insertBefore(errorDiv, input.nextSibling);
+    }
 
     function validate() {
         let firstInvalid = null;
@@ -42,7 +56,7 @@
         form.querySelectorAll('.group-error, .error-message').forEach(el => el.remove());
         form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
 
-        ['first-name', 'last-name', 'email', 'mobile-phone'].forEach(id => {
+        REQUIRED_TEXT_FIELDS.forEach(id => {
             const input = document.getElementById(id);
             const value = input.value.trim();
             let message = '';
@@ -53,32 +67,24 @@
                 message = 'Please enter a valid email address.';
             } else if (input.type === 'tel' && !/^[\+]?[\s\-\(\)]?[\d\s\-\(\)]{10,}$/.test(value)) {
                 message = 'Please enter a valid phone number.';
+            } else if (id === 'zip' && !/^\d{5}(-\d{4})?$/.test(value)) {
+                message = 'Please enter a 5-digit ZIP code.';
             }
 
             if (message) {
-                input.classList.add('error');
-                const existing = input.parentNode.querySelector('.error-message');
-                if (existing) existing.remove();
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'error-message';
-                errorDiv.textContent = message;
-                input.parentNode.insertBefore(errorDiv, input.nextSibling);
+                showFieldError(input, message);
                 if (!firstInvalid) firstInvalid = input;
             }
         });
 
-        // At least one way to help.
-        const helpGroup = document.getElementById('help-group');
-        if (!form.querySelector('input[name="help"]:checked')) {
-            showGroupError(helpGroup, 'Please select at least one way you would like to help.');
-            if (!firstInvalid) firstInvalid = helpGroup.querySelector('input[name="help"]');
-        }
-
-        // A text-messaging answer, either way. Silence is not consent.
-        const smsGroup = document.getElementById('sms-group');
-        if (!form.querySelector('input[name="sms_consent"]:checked')) {
-            showGroupError(smsGroup, 'Please let us know whether we may text you.');
-            if (!firstInvalid) firstInvalid = document.getElementById('sms-yes');
+        // A sign cannot be delivered without permission to place it.
+        const permission = document.getElementById('permission');
+        if (!permission.checked) {
+            showGroupError(
+                document.getElementById('permission-group'),
+                'Please confirm you can place a sign at this address.'
+            );
+            if (!firstInvalid) firstInvalid = permission;
         }
 
         return firstInvalid;
@@ -87,11 +93,11 @@
     function showNotWiredNotice() {
         document.querySelector('.form-card').innerHTML = `
             <div style="text-align: center; padding: 40px;">
-                <h2 style="color: var(--secondary); margin-bottom: 20px;">Sign-ups aren't open just yet</h2>
+                <h2 style="color: var(--secondary); margin-bottom: 20px;">Sign requests aren't open just yet</h2>
                 <p style="font-size: 18px; margin-bottom: 30px;">
-                    We're putting the finishing touches on our volunteer system and this
-                    form isn't accepting submissions yet. Please check back shortly &mdash;
-                    or reach out directly and we'll get you on the list right now.
+                    We're still setting this up and the form isn't accepting requests yet.
+                    Please check back shortly &mdash; or reach out directly and we'll get a
+                    sign to you.
                 </p>
                 <p style="margin-bottom: 30px;">
                     <a href="mailto:denisedye4noblesville@gmail.com">denisedye4noblesville@gmail.com</a>
@@ -116,22 +122,19 @@
 
         const action = form.getAttribute('action');
 
-        // No endpoint configured yet - say so rather than appearing to silently fail.
         if (!action) {
             e.preventDefault();
             showNotWiredNotice();
             return;
         }
 
-        // Post in the background instead of letting the browser navigate to the endpoint.
+        // Post in the background rather than letting the browser navigate to the endpoint.
         // A Google Apps Script /exec URL answers a native form POST with its own Google-
-        // hosted response page, which would dump the visitor onto a raw script.google.com
-        // screen. Submitting here lets us keep them on our own thank-you page.
+        // hosted page, which would dump the visitor onto a raw script.google.com screen.
         //
-        // mode 'no-cors' is required: Apps Script web apps cannot set CORS response headers,
-        // so a normal cross-origin POST would be rejected. The trade-off is an opaque
-        // response - we cannot read the status, so we treat "request sent" as success and
-        // only surface an error if the network call itself fails.
+        // mode 'no-cors' is required: Apps Script web apps cannot set CORS response headers.
+        // The trade-off is an opaque response - we cannot read the status, so "request sent"
+        // is treated as success and only a network-level failure surfaces an error.
         e.preventDefault();
 
         const submitButton = form.querySelector('button[type="submit"]');
@@ -139,7 +142,6 @@
         submitButton.disabled = true;
         submitButton.textContent = 'Sending...';
 
-        // URLSearchParams keeps repeated keys (help, availability, skills) as repeats, and
         // urlencoded is a CORS-safelisted content type, so the request stays preflight-free.
         const body = new URLSearchParams(new FormData(form));
 

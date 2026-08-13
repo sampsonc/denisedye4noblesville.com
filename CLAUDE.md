@@ -67,8 +67,20 @@ then ping IndexNow. Because it stages everything, check `git status` before runn
 ### Forms
 - Client-side validation only (no backend integration)
 - Newsletter signup in main page
-- Separate volunteer.html, contact.html, and jointeamdenise.html forms
+- Separate volunteer.html, contact.html, jointeamdenise.html, and yardsign.html forms
 - Form styling uses consistent campaign theme colors
+- `css/forms.css` holds the shared styling for the standalone form pages (form card, fields,
+  checkbox/radio rows, validation errors, the fixed-header top offset). `jointeamdenise.html`
+  and `yardsign.html` load it after `main.css`. Older `volunteer.html` and `contact.html` still
+  carry their own inline copies.
+- `forms/yardsign.html` is the yard sign request form. It posts to the **same Apps Script
+  endpoint** as the volunteer signup and sends a hidden `form_type=yard_sign` field; the join
+  form should send `form_type=join_team`. The Apps Script must branch on
+  `e.parameter.form_type` and write to separate sheets, or yard sign requests land in the
+  volunteer sheet with most columns empty. Confirmation page is `thank-you-yardsign.html`.
+- Never put page JS in an inline `<script>` on any page: production CSP is
+  `script-src 'self' static.getclicky.com` with no `'unsafe-inline'`, so nginx silently blocks
+  it and the page loses all behaviour. Page scripts go in their own file under `js/`.
 - `forms/jointeamdenise.html` is the current volunteer signup (the `#join` section links to
   it). Its `<form action="">` is deliberately **blank** — no endpoint is wired yet, so a
   valid submit shows a "sign-ups aren't open just yet" notice instead of sending. To

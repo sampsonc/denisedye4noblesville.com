@@ -525,8 +525,14 @@ const mobileCSS = `
             padding: var(--space-3);
         }
 
-        /* Improve mobile form elements */
-        input, textarea {
+        /* Improve mobile form elements.
+           Checkboxes and radios are excluded deliberately. A bare "input" selector here
+           applies -webkit-appearance: none to them as well, which strips their native
+           rendering; combined with the width: auto they get inside .checkbox-item, they
+           collapse to 0x0 and vanish entirely on phones. This rule is only meant for text
+           inputs - the 16px is what stops iOS zooming on focus. */
+        input:not([type="checkbox"]):not([type="radio"]),
+        textarea {
             font-size: 16px; /* Prevents zoom on iOS */
             -webkit-appearance: none;
             border-radius: var(--border-radius);

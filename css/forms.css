@@ -1,0 +1,251 @@
+/* Shared styles for the standalone form pages under forms/.
+ *
+ * Extracted from forms/jointeamdenise.html so the yard sign form and the volunteer signup
+ * cannot drift apart visually. Loaded AFTER css/main.css, which supplies the variables,
+ * buttons, header, and footer.
+ *
+ * Note these pages must not use an inline <style> for anything load-bearing either: the
+ * production CSP allows 'unsafe-inline' for styles but NOT for scripts, so page JS belongs
+ * in its own file (see js/jointeamdenise.js, js/yardsign.js).
+ */
+
+/* Top margin clears the fixed header, which is ~138px on desktop and ~143px down to the
+   480px breakpoint. Below that the brand text and election banner both wrap and the header
+   grows to ~173px, so the narrow-screen override at the bottom INCREASES this rather than
+   reducing it. If the banner wording changes, re-check both. */
+.form-container {
+  max-width: 600px;
+  margin: 160px auto 60px;
+  padding: 0 20px;
+}
+
+.form-card {
+  background: var(--card-bg);
+  padding: var(--space-8);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 4px 6px var(--shadow);
+}
+
+.form-group {
+  margin-bottom: var(--space-6);
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: var(--space-3);
+  border: 2px solid var(--border);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  font-family: var(--font-primary);
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Two fields side by side (City / ZIP). Collapses to one column on narrow screens. */
+.form-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-4);
+}
+
+.checkbox-group {
+  margin: var(--space-6) 0;
+  border: none;
+}
+
+.checkbox-group legend {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-4);
+}
+
+/* Numbered steps read at one level whether they're an <h2> or a fieldset <legend>.
+   Unnumbered sub-questions keep the smaller default. */
+.checkbox-group legend.section-legend {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-2);
+}
+
+fieldset:has(> .section-legend) {
+  margin-top: var(--space-10);
+}
+
+.checkbox-item,
+.radio-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg);
+  border-radius: var(--border-radius);
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.checkbox-item:hover,
+.radio-item:hover {
+  border-color: var(--border);
+}
+
+.checkbox-item input[type="checkbox"],
+.radio-item input[type="radio"] {
+  width: auto;
+  margin-right: var(--space-3);
+  transform: scale(1.2);
+  flex-shrink: 0;
+}
+
+.checkbox-item label,
+.radio-item label {
+  margin: 0;
+  cursor: pointer;
+  flex: 1;
+  font-weight: 500;
+}
+
+.checkbox-item .description,
+.radio-item .description {
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
+  margin-top: var(--space-1);
+  font-weight: 400;
+}
+
+/* "Other:" free-text field, indented under its checkbox */
+.other-skill-input {
+  margin: var(--space-2) 0 var(--space-3) var(--space-8);
+}
+
+.other-skill-input input {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 2px solid var(--border);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  font-family: var(--font-primary);
+}
+
+.other-skill-input input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Accessible name for fields labelled visually by a nearby control.
+   main.css has no visually-hidden utility, so define one here. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Required-by-law consent wording. Kept visually quiet but never hidden. */
+.consent-fine-print {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: var(--space-3);
+}
+
+.subsection-heading {
+  font-weight: 600;
+  color: var(--text);
+  margin: var(--space-8) 0 var(--space-4);
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: var(--space-6);
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.required {
+  color: var(--accent);
+}
+
+.form-note {
+  background: var(--bg);
+  padding: var(--space-4);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--space-6);
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
+}
+
+.optional-note {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-bottom: var(--space-4);
+}
+
+/* Validation errors raised for a whole fieldset rather than a single input */
+.group-error {
+  color: #ef4444;
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 480px) {
+  /* Header is TALLER here (~173px), not shorter - see note at the top. */
+  .form-container {
+    margin-top: 195px;
+  }
+
+  .form-card {
+    padding: var(--space-5);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .other-skill-input {
+    margin-left: var(--space-4);
+  }
+
+  .other-skill-input input {
+    width: 100%;
+  }
+}

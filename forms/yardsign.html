@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Yard Sign - Denise Dye for School Board</title>
+    <meta name="description" content="Request a Denise Dye for Noblesville School Board yard sign. Tell us where to deliver it and a volunteer will drop one off.">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/forms.css">
+
+    <script async data-id="101507558" src="/1a5ae8c8beb7e24874.js"></script>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <!-- Mirrors the header on index.html. Links are prefixed with ../index.html because this
+         page lives in forms/; the anchors alone would resolve against this page. -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <a href="/" aria-label="Denise Dye for Noblesville School Board — home"><span class="brand-text">Denise Dye<br>for Noblesville School Board</span></a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li><a href="../index.html#platform" class="nav-link">Platform</a></li>
+                <li><a href="../index.html#events" class="nav-link">Events</a></li>
+                <li><a href="../index.html#endorsements" class="nav-link">Endorsements</a></li>
+                <li><a href="../index.html#join" class="nav-link">Join Team Denise</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="../index.html#vote" class="nav-link">Vote</a></li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+        <div class="election-banner">
+            <strong>Early voting begins on October 9.  Election day - Tuesday, November 3rd.</strong>
+        </div>
+    </header>
+
+    <div class="form-container">
+        <div class="form-card">
+            <h1>Request a Yard Sign</h1>
+            <p class="section-subtitle">Show your support where your neighbors will see it</p>
+
+            <div class="form-note">
+                <strong>Signs are free.</strong> Tell us where to bring it and a volunteer will drop one off. We only deliver within the Noblesville Schools district &mdash; if you're outside it, email us and we'll figure something out.
+            </div>
+
+            <!-- SHARED ENDPOINT.
+                 This posts to the same Google Apps Script as the Join Team Denise form. The
+                 hidden form_type field below is how the script tells them apart - it must
+                 branch on e.parameter.form_type ("yard_sign" here, "join_team" there) and
+                 write to separate sheets, or yard sign requests will land in the volunteer
+                 sheet with most columns empty. See CLAUDE.md.
+                 To use a separate endpoint instead, just change the action URL. -->
+            <form id="yard-sign-form" method="POST"
+                  action="https://script.google.com/macros/s/AKfycbwsvL5jf2tfn2Eii6MB_GYK1Y5dQZ8PP4c4ZuSJQmea4mQNuTLvmqQluNuiMJKv9Jg/exec"
+                  novalidate>
+
+                <input type="hidden" name="form_type" value="yard_sign">
+
+                <!-- 1. Your Information -->
+                <h2 class="subsection-heading">1. Your Information</h2>
+
+                <div class="form-group">
+                    <label for="first-name">First Name <span class="required">*</span></label>
+                    <input type="text" id="first-name" name="first_name" autocomplete="given-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="last-name">Last Name <span class="required">*</span></label>
+                    <input type="text" id="last-name" name="last_name" autocomplete="family-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile-phone">Mobile Phone <span class="required">*</span></label>
+                    <input type="tel" id="mobile-phone" name="mobile_phone" autocomplete="tel" placeholder="(317) 555-0123" required>
+                    <p class="optional-note" style="margin-top: var(--space-2); margin-bottom: 0;">So the volunteer delivering your sign can reach you.</p>
+                </div>
+
+                <!-- 2. Delivery Address -->
+                <h2 class="subsection-heading">2. Where should we bring it?</h2>
+
+                <div class="form-group">
+                    <label for="street-address">Street Address <span class="required">*</span></label>
+                    <input type="text" id="street-address" name="street_address" autocomplete="street-address" placeholder="123 Main St." required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" autocomplete="address-level2" value="Noblesville" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zip">ZIP <span class="required">*</span></label>
+                        <input type="text" id="zip" name="zip" autocomplete="postal-code" inputmode="numeric" placeholder="46062" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="placement-notes">Placement notes</label>
+                    <input type="text" id="placement-notes" name="placement_notes" placeholder="Optional &mdash; e.g. corner lot, place near the driveway">
+                </div>
+
+                <!-- 3. Sign details -->
+                <h2 class="subsection-heading">3. Sign Details</h2>
+
+                <div class="form-group">
+                    <label for="sign-count">How many signs?</label>
+                    <select id="sign-count" name="sign_count">
+                        <option value="1" selected>1 sign</option>
+                        <option value="2">2 signs</option>
+                        <option value="3">3 signs</option>
+                        <option value="4+">4 or more</option>
+                    </select>
+                </div>
+
+                <fieldset class="checkbox-group" id="permission-group">
+                    <legend>Placement permission <span class="required">*</span></legend>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="permission" name="permission" value="yes">
+                        <label for="permission">
+                            I own this property, or I have the owner's permission to place a sign here.
+                            <div class="description">We can't place signs on rental property, HOA common areas, or public right-of-way without permission.</div>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- 4. Anything else -->
+                <h2 class="subsection-heading">4. Anything else?</h2>
+
+                <div class="form-group">
+                    <label for="notes">Is there anything you'd like us to know?</label>
+                    <textarea id="notes" name="notes" placeholder="Questions, delivery timing, or anything else."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Request My Yard Sign</button>
+                    <a href="../index.html" class="btn btn-secondary">Back to Campaign</a>
+                </div>
+            </form>
+
+            <p class="optional-note" style="text-align: center; margin-top: var(--space-8); margin-bottom: 0;">
+                Want to do more than put up a sign?
+                <a href="jointeamdenise.html">Join Team Denise</a>.
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Mirrors the footer on index.html, with ../index.html prefixes for this subdirectory. -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Denise Dye for School Board</h4>
+                    <p>Experienced leadership for Noblesville Schools</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html#platform">My Platform</a></li>
+                        <li><a href="../index.html#about">About Me</a></li>
+                        <li><a href="../index.html#events">Events</a></li>
+                        <li><a href="../index.html#endorsements">Endorsements</a></li>
+                        <li><a href="../index.html#join">Join Team Denise</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                        <li><a href="../index.html#vote">Vote</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Denise Dye for School Board. Paid for by the Committee to Elect Denise Dye.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/yardsign.js"></script>
+</body>
+</html>

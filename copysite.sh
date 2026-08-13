@@ -29,6 +29,7 @@ curl -s -X POST "https://api.indexnow.org/indexnow" \
       "https://denisedye4noblesville.com/",
       "https://denisedye4noblesville.com/denise.html",
       "https://denisedye4noblesville.com/forms/jointeamdenise.html",
+      "https://denisedye4noblesville.com/forms/yardsign.html",
       "https://denisedye4noblesville.com/forms/volunteer.html",
       "https://denisedye4noblesville.com/forms/contact.html"
     ]

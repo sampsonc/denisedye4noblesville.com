@@ -878,6 +878,22 @@ section {
   font-size: var(--font-size-sm);
 }
 
+/* Secondary path out of the Join band, for people who only want a sign. */
+.join-secondary {
+  margin: var(--space-6) 0 0;
+  color: #d8d8d8;
+  font-size: var(--font-size-sm);
+}
+
+.join-secondary a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.join-secondary a:hover {
+  color: var(--primary-light);
+}
+
 /* Centered on its own rather than relying on inherited text-align. */
 .join-team-card .btn {
   display: block;
