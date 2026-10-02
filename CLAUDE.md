@@ -42,6 +42,7 @@ then ping IndexNow. Because it stages everything, check `git status` before runn
 - `images/candidates/` - Candidate headshot (denise.jpg)
 - `copysite.sh` - The deploy script (commit, push, rsync, IndexNow ping)
 - `deployment/nginx/` - Production nginx config, version-controlled here but not deployed by `copysite.sh`
+- `deployment/apps-script/Code.gs` - Source of the Google Apps Script the forms post to; pasted into the Apps Script editor by hand
 
 ### Styling System
 - Uses CSS custom properties (variables) for consistent theming
@@ -73,26 +74,38 @@ then ping IndexNow. Because it stages everything, check `git status` before runn
   checkbox/radio rows, validation errors, the fixed-header top offset). `jointeamdenise.html`
   and `yardsign.html` load it after `main.css`. Older `volunteer.html` and `contact.html` still
   carry their own inline copies.
-- `forms/yardsign.html` is the yard sign request form. It posts to the **same Apps Script
-  endpoint** as the volunteer signup and sends a hidden `form_type=yard_sign` field; the join
-  form should send `form_type=join_team`. The Apps Script must branch on
-  `e.parameter.form_type` and write to separate sheets, or yard sign requests land in the
-  volunteer sheet with most columns empty. Confirmation page is `thank-you-yardsign.html`.
+- Both live forms (`jointeamdenise.html`, `yardsign.html`) post to one Google Apps Script web
+  app bound to the "Denise-Working Campaign HQ" sheet. Its source is version-controlled at
+  `deployment/apps-script/Code.gs` (not deployed by `copysite.sh` — edits must be pasted into
+  the Apps Script editor and released via Deploy → Manage deployments → New version, which
+  keeps the URL; "New deployment" would change it). `doPost` routes on `form_type`:
+  `yard_sign` → Yard Signs tab, anything else (the join form sends none) → Volunteer Intake.
+  Each submission also emails the campaign inbox and the submitter.
+- The page JS submits via `fetch(..., {mode: 'no-cors'})` and then redirects to the
+  thank-you page, so the response is opaque: a rejected or failed submission still looks like
+  success to the visitor.
+- Spam guard (added 2026-10-02 after bot sign-ups): `isSpam()` in Code.gs silently drops a
+  post that has fewer than 10 phone digits, the 10-random-lowercase-letter name pattern, a
+  filled `website` honeypot, or (when `REQUIRE_PAGE_TOKEN` is true) a missing
+  `_token=td2026` or `_t` (ms on page) under 2000. The form JS fills `_token`/`_t` at submit.
+  **Deploy order matters**: site changes that add or rename these fields must go live before
+  the matching script version, or real submissions are silently dropped. `sanitizeForSheet()`
+  prefixes values starting with `= + - @` with `'` so they aren't evaluated as formulas.
+- `forms/yardsign.html` is the yard sign request form; it sends a hidden `form_type=yard_sign`.
+  Confirmation page is `thank-you-yardsign.html`.
 - Never put page JS in an inline `<script>` on any page: production CSP is
   `script-src 'self' static.getclicky.com` with no `'unsafe-inline'`, so nginx silently blocks
   it and the page loses all behaviour. Page scripts go in their own file under `js/`.
 - `forms/jointeamdenise.html` is the current volunteer signup (the `#join` section links to
-  it). Its `<form action="">` is deliberately **blank** — no endpoint is wired yet, so a
-  valid submit shows a "sign-ups aren't open just yet" notice instead of sending. To
-  activate: paste an endpoint URL (e.g. Formspree) into `action` and uncomment the three
-  hidden fields directly below the opening tag. The notice removes itself automatically once
-  `action` is non-empty; no other edit is needed.
-- Its field names are the contract for downstream automation: checkboxes repeat their name
-  (`help`, `availability`, `skills`), radios send one value (`frequency`, `sms_consent`).
+  it). If its `action` is ever emptied, the submit handler shows a "sign-ups aren't open just
+  yet" notice instead of sending.
+- Its field names are the contract with Code.gs, which reads them by name and writes
+  Volunteer Intake columns by position: checkboxes repeat their name (`help`, `availability`,
+  `skills`), radios send one value (`frequency`, `sms_consent`).
 - The SMS consent wording is generic TCPA language. Name the actual sending program and
   confirm the opt-out text once an SMS provider is chosen — see the TODO in section 5.
-- `thank-you.html` (repo root, `noindex`) is the post-submit confirmation page, reached via
-  the commented-out `_next` hidden field. It is unreachable until the endpoint is wired.
+- `thank-you.html` (repo root, `noindex`) is the join form's post-submit confirmation page;
+  `js/jointeamdenise.js` redirects there after sending.
 - `js/main.js` guards every nav/header lookup because the standalone `forms/` pages load it
   without a nav header; before those guards a null dereference aborted the whole
   DOMContentLoaded handler and silently disabled form validation on all form pages.

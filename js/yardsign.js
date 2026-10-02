@@ -26,20 +26,6 @@
         'street-address', 'city', 'zip'
     ];
 
-    function clearGroupError(fieldset) {
-        const existing = fieldset.querySelector('.group-error');
-        if (existing) existing.remove();
-    }
-
-    function showGroupError(fieldset, message) {
-        clearGroupError(fieldset);
-        const div = document.createElement('div');
-        div.className = 'group-error';
-        div.textContent = message;
-        fieldset.appendChild(div);
-    }
-
-
     function showFieldError(input, message) {
         input.classList.add('error');
         const existing = input.parentNode.querySelector('.error-message');
@@ -131,7 +117,6 @@
         e.preventDefault();
 
         const submitButton = form.querySelector('button[type="submit"]');
-        const originalLabel = submitButton.textContent;
         submitButton.disabled = true;
         submitButton.textContent = 'Sending...';
 
@@ -141,17 +126,19 @@
         // urlencoded is a CORS-safelisted content type, so the request stays preflight-free.
         const body = new URLSearchParams(new FormData(form));
 
+        // Apps Script answers with a 302 to script.googleusercontent.com, which fetch
+        // follows; nginx connect-src must allow that host or Safari rejects the fetch.
         fetch(action, { method: 'POST', mode: 'no-cors', body: body })
             .then(function () {
                 window.location.href = THANK_YOU_URL;
             })
             .catch(function () {
-                submitButton.disabled = false;
-                submitButton.textContent = originalLabel;
-                showGroupError(
-                    form.querySelector('.form-actions'),
-                    "Sorry - we couldn't send that just now. Please try again, or email denisedye4noblesville@gmail.com."
-                );
+                // Blocked by the browser (ad blocker, privacy setting, CSP). Fall back to an
+                // ordinary form POST, which blockers leave alone; the visitor then sees the
+                // script's own thank-you page instead of ours. submit() skips this handler.
+                // If only the redirect hop was blocked, the script already ran once, so this
+                // can produce a duplicate row - better than losing the submission.
+                form.submit();
             });
     });
 })();
