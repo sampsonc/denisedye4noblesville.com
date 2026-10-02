@@ -13,6 +13,13 @@
 
     const THANK_YOU_URL = '/thank-you.html';
 
+    // Spam guard values checked by the Apps Script (deployment/apps-script/Code.gs). Bots
+    // that post straight to the script URL never run this file, so they lack both. _t is
+    // time spent on the page, measured here so a wrong clock on the visitor's device
+    // can't cause a real submission to be rejected.
+    const PAGE_TOKEN = 'td2026';
+    const loadedAt = Date.now();
+
     function clearGroupError(fieldset) {
         const existing = fieldset.querySelector('.group-error');
         if (existing) existing.remove();
@@ -138,6 +145,9 @@
         const originalLabel = submitButton.textContent;
         submitButton.disabled = true;
         submitButton.textContent = 'Sending...';
+
+        form.elements._token.value = PAGE_TOKEN;
+        form.elements._t.value = String(Date.now() - loadedAt);
 
         // URLSearchParams keeps repeated keys (help, availability, skills) as repeats, and
         // urlencoded is a CORS-safelisted content type, so the request stays preflight-free.

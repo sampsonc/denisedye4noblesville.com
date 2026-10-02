@@ -55,12 +55,21 @@
                  branch on e.parameter.form_type ("yard_sign" here, "join_team" there) and
                  write to separate sheets, or yard sign requests will land in the volunteer
                  sheet with most columns empty. See CLAUDE.md.
-                 To use a separate endpoint instead, just change the action URL. -->
+                 To use a separate endpoint instead, just change the action URL.
+
+                 Spam guard: the script rejects posts with the honeypot filled, or without the
+                 _token / _t values that js/yardsign.js fills in. -->
             <form id="yard-sign-form" method="POST"
                   action="https://script.google.com/macros/s/AKfycbwsvL5jf2tfn2Eii6MB_GYK1Y5dQZ8PP4c4ZuSJQmea4mQNuTLvmqQluNuiMJKv9Jg/exec"
                   novalidate>
 
                 <input type="hidden" name="form_type" value="yard_sign">
+                <input type="hidden" name="_token" value="">
+                <input type="hidden" name="_t" value="">
+                <div class="hp-field" aria-hidden="true">
+                    <label for="website">Leave this field empty</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
 
                 <!-- 1. Your Information -->
                 <h2 class="subsection-heading">1. Your Information</h2>

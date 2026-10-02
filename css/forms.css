@@ -167,6 +167,15 @@ fieldset:has(> .section-legend) {
   border: 0;
 }
 
+/* Spam honeypot. Moved off-screen rather than display:none, which some bots skip. */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* Required-by-law consent wording. Kept visually quiet but never hidden. */
 .consent-fine-print {
   font-size: var(--font-size-sm);
