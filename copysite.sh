@@ -7,6 +7,7 @@ rsync -avz --delete -e ssh \
   --exclude '.git' \
   --exclude '.gitignore' \
   --exclude '.claude' \
+  --exclude '.playwright-mcp' \
   --exclude '.DS_Store' \
   --exclude '*.md' \
   --exclude '*.bak' \

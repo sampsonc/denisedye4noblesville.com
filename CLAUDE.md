@@ -159,7 +159,7 @@ Adding a new section requires: the `<section id>` in index.html, a nav `<li>` in
 ## Deployment Notes
 
 The site is designed for static hosting and requires no server-side processing. `copysite.sh`
-handles the git commit and rsyncs to production, excluding `.git`, `.claude`, `*.md`, `*.bak`,
+handles the git commit and rsyncs to production, excluding `.git`, `.claude`, `.playwright-mcp`, `*.md`, `*.bak`,
 `deployment/`, `backups/`, and the script itself. The site is optimized for fast loading and
 mobile performance.
 
