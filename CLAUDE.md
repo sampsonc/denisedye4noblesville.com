@@ -125,7 +125,7 @@ Homepage sections, in document order (each is a top-level `<section>` with an `i
 2. `#about` — Candidate profile with photo, qualifications, and link to denise.html
 3. `#platform` — Three-pillar platform (Prioritizing Education, Partnering with Parents, Promoting Financial Responsibility)
 4. `#events` — Upcoming campaign events card grid (currently placeholder entries marked with HTML comments — replace with real events)
-5. `#endorsements` — Endorsement cards plus a CTA linking to the endorsement Google Form
+5. `#endorsements` — Endorsement cards, then a `#letters` "Letters to the Editor" block (`.letter-card` grid, newest first; `.letter-featured` spans the row in a dark band, `.letter-candidate` marks Denise's own letter; quotes must be verbatim), then a CTA linking to the endorsement Google Form. The hero's `.hero-letters-link` jumps to `#letters`. Pre-change state is tagged `pre-letters-to-editor`.
 6. `#join` — Dark "Join Team Denise" CTA band; pitch only, links to `forms/jointeamdenise.html`
 7. `#contact` — Email, phone, and mailing address
 8. `#vote` — Voting information with Hamilton County polling location links

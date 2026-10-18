@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // NOTE: this selector and the start-state CSS in `additionalCSS` below must stay in
     // sync. An element listed only in the CSS starts hidden and is never revealed.
     const animateElements = document.querySelectorAll(
-        '.platform-item, .candidate-profile, .endorsement, .involvement-card, .vote-card, .event-card, .join-team-card'
+        '.platform-item, .candidate-profile, .endorsement, .involvement-card, .vote-card, .event-card, .join-team-card, .letter-card'
     );
 
     animateElements.forEach(el => {
@@ -451,7 +451,8 @@ const additionalCSS = `
     .involvement-card,
     .vote-card,
     .event-card,
-    .join-team-card {
+    .join-team-card,
+    .letter-card {
         opacity: 0;
         transform: translateY(30px);
         transition: opacity 0.6s ease, transform 0.6s ease;
