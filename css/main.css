@@ -796,6 +796,12 @@ section {
   background-color: #fdf8e8;
 }
 
+/* Social post: full row under the letters, dashed top rule sets it apart from print letters */
+.letter-social {
+  grid-column: 1 / -1;
+  border-top-style: dashed;
+}
+
 .hero-letters-link {
   display: inline-block;
   margin-top: var(--space-6);
