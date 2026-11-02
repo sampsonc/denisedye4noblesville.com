@@ -803,6 +803,95 @@ section {
 }
 
 /* Hero callout for Denise's own letter */
+/* Election Day box at top of hero. Remove after November 3, 2026. */
+.vote-now {
+  max-width: 640px;
+  margin: 0 auto var(--space-10);
+  padding: var(--space-6) var(--space-8);
+  background-color: var(--primary);
+  color: var(--secondary);
+  border-radius: var(--border-radius-lg);
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25);
+}
+
+.vote-now-label {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.vote-now-title {
+  font-size: var(--font-size-4xl);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: var(--space-1) 0 var(--space-3);
+  color: var(--secondary);
+}
+
+.vote-now p {
+  color: var(--secondary);
+}
+
+.vote-now-hours {
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--space-2);
+}
+
+.vote-now-where {
+  margin: 0 0 var(--space-4);
+}
+
+.vote-now-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.vote-now .btn-primary {
+  background-color: var(--secondary);
+  border-color: var(--secondary);
+  color: white;
+}
+
+.vote-now .btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
+}
+
+.vote-now .btn-primary:hover {
+  background-color: #000;
+  border-color: #000;
+}
+
+.vote-now .btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  color: var(--secondary);
+}
+
+.vote-now-help {
+  font-size: var(--font-size-sm);
+  margin: var(--space-4) 0 0;
+}
+
+.vote-now-help a {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .vote-now {
+    padding: var(--space-5) var(--space-4);
+  }
+  .vote-now-actions .btn {
+    width: 100%;
+  }
+}
+
 .hero-letter {
   display: block;
   max-width: 640px;
